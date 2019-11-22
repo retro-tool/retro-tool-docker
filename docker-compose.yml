@@ -1,0 +1,35 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:12-alpine
+    volumes:
+      - 'pg:/var/lib/postgresql/data'
+  api:
+    build: ../retro-tool-api
+    image: xrt/xrt-api:latest
+    env_file: api.env
+    links:
+      - postgres
+    depends_on:
+      - postgres
+  client:
+    build: ../retro-tool-client
+    image: xrt/xrt-client:latest
+    links:
+      - api
+    depends_on:
+      - api
+  proxy:
+    build: ../retro-tool-proxy
+    image: xrt/xrt-proxy:latest
+    ports:
+      - 3000:80
+    links:
+      - client
+      - api
+    depends_on:
+      - client
+      - api
+
+volumes:
+  pg:
