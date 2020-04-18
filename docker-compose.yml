@@ -5,23 +5,20 @@ services:
     volumes:
       - 'pg:/var/lib/postgresql/data'
   api:
-    build: ../retro-tool-api
-    image: xrt/xrt-api:latest
+    image: retrotool/api:latest
     env_file: api.env
     links:
       - postgres
     depends_on:
       - postgres
   client:
-    build: ../retro-tool-client
-    image: xrt/xrt-client:latest
+    image: retrotool/client:latest
     links:
       - api
     depends_on:
       - api
   proxy:
-    build: ../retro-tool-proxy
-    image: xrt/xrt-proxy:latest
+    image: retrotool/proxy:latest
     ports:
       - 3000:80
     links:
