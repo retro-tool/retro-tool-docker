@@ -6,6 +6,7 @@ services:
       - 'pg:/var/lib/postgresql/data'
   api:
     image: retrotool/api:latest
+    command: start
     env_file: api.env
     links:
       - postgres
