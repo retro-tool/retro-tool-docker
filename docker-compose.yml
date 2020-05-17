@@ -1,10 +1,12 @@
 version: '3'
 services:
   postgres:
+    container_name: postgres
     image: postgres:12-alpine
     volumes:
       - 'pg:/var/lib/postgresql/data'
   api:
+    container_name: xrt_api
     image: retrotool/api:latest
     command: start
     env_file: api.env
@@ -13,12 +15,14 @@ services:
     depends_on:
       - postgres
   client:
+    container_name: xrt_client
     image: retrotool/client:latest
     links:
       - api
     depends_on:
       - api
   proxy:
+    container_name: xrt_proxy
     image: retrotool/proxy:latest
     ports:
       - 3000:80
