@@ -7,7 +7,7 @@ services:
     volumes:
       - 'pg:/var/lib/postgresql/data'
   api:
-    container_name: xrt_api
+    container_name: xrt-api
     image: retrotool/api:latest
     command: start
     env_file: api.env
@@ -17,7 +17,7 @@ services:
     depends_on:
       - postgres
   client:
-    container_name: xrt_client
+    container_name: xrt-client
     image: retrotool/client:latest
     restart: always
     links:
@@ -25,7 +25,7 @@ services:
     depends_on:
       - api
   proxy:
-    container_name: xrt_proxy
+    container_name: xrt-proxy
     image: retrotool/proxy:latest
     restart: always
     ports:
