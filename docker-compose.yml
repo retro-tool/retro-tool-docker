@@ -6,6 +6,8 @@ services:
     restart: always
     volumes:
       - 'pg:/var/lib/postgresql/data'
+    ports:
+      - 5432:5432
   api:
     container_name: xrt-api
     image: retrotool/api:latest
