@@ -8,6 +8,9 @@ services:
       - 'pg:/var/lib/postgresql/data'
     ports:
       - 5432:5432
+    environment:
+      POSTGRES_DB: xrt_prod
+      POSTGRES_PASSWORD: postgres
   api:
     container_name: xrt-api
     image: retrotool/api:latest
