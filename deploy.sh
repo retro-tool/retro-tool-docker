@@ -2,7 +2,8 @@
 
 set -ex
 
-cd ~/apps/retro-tool-docker
+CWD=$(cd $(dirname "$0");pwd)
+cd $CWD
 git pull
 docker-compose pull
 docker-compose up -d
